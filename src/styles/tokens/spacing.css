@@ -13,3 +13,8 @@
   --page-max:1200px; /* @kind spacing */
   --page-gutter:var(--s-6);
 }
+
+/* Breakpoints (literal px in each @media — custom properties aren't usable in media features):
+   560px — secondary content grids (e.g. stack-groups) drop to 1 column
+   720px — top nav collapses into a mobile menu
+   900px — primary 2-column section grids stack to 1 column */
