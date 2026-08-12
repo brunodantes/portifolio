@@ -1,16 +1,12 @@
-import React from 'react';
+import './Icon.css';
 
 const SETS={ui:'ui',tech:'tech'};
 
-export function Icon({name,set='ui',size=20,color='currentColor',base='assets/icons',style,...rest}){
+export function Icon({name,set='ui',size=20,color='currentColor',base='assets/icons',className,...rest}){
   const dir=SETS[set]||'ui';
   const url=`${base}/${dir}/${name}.svg`;
-  return React.createElement('span',{
-    role:'img','aria-label':rest['aria-label']||name,
-    style:{display:'inline-block',width:size,height:size,flex:'0 0 auto',background:color,
-      WebkitMaskImage:`url("${url}")`,maskImage:`url("${url}")`,
-      WebkitMaskRepeat:'no-repeat',maskRepeat:'no-repeat',
-      WebkitMaskPosition:'center',maskPosition:'center',
-      WebkitMaskSize:'contain',maskSize:'contain',...style},
-    ...rest});
+  const vars={'--icon-size':`${size}px`,'--icon-color':color,'--icon-url':`url("${url}")`};
+  return (
+    <span role="img" aria-label={rest['aria-label']||name} className={['icon',className].filter(Boolean).join(' ')} style={vars} {...rest}/>
+  );
 }

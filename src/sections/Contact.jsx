@@ -1,8 +1,8 @@
-import React from 'react';
 import {Card} from '../components/core/Card.jsx';
 import {Icon} from '../components/core/Icon.jsx';
 import {Switch} from '../components/forms/Switch.jsx';
 import {SectionHeading} from '../components/navigation/SectionHeading.jsx';
+import './Contact.css';
 
 const C_ICONS='/assets/icons';
 
@@ -16,25 +16,24 @@ export function Contact({data,motion,onMotion}){
     {icon:'box',label:t.resumeLabel,hint:t.resumeHint,value:'PDF',href:data.player.resumeUrl,external:true}
   ];
   return (
-    <section style={{padding:'var(--section-y) var(--page-gutter)',background:'var(--bg-deep)',borderTop:'1px solid var(--border-subtle)'}}>
-      <div style={{maxWidth:'var(--page-max)',margin:'0 auto',display:'grid',gap:'var(--s-12)'}}>
+    <section className="contact-section">
+      <div className="contact-inner">
         <SectionHeading index="03" kicker={t.kicker} title={t.title} lead={t.lead}/>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'var(--gap-grid)'}}>
+        <div className="contact-grid">
           {channels.map(c=>(
-            <a key={c.label} href={c.href} target={c.external?'_blank':undefined} rel={c.external?'noopener noreferrer':undefined}
-              style={{textDecoration:'none',color:'inherit',display:'block'}}>
-              <Card interactive style={{display:'grid',gap:'var(--s-3)',height:'100%'}}>
-                <div style={{display:'flex',alignItems:'center',gap:10}}>
+            <a key={c.label} href={c.href} target={c.external?'_blank':undefined} rel={c.external?'noopener noreferrer':undefined} className="contact-channel-link">
+              <Card interactive className="contact-channel-card">
+                <div className="contact-channel-header">
                   <Icon name={c.icon} base={C_ICONS} size={18} color="var(--accent)"/>
-                  <span className="ds-hud" style={{color:'var(--text-title)'}}>{c.label}</span>
+                  <span className="ds-hud contact-channel-label">{c.label}</span>
                 </div>
-                <span style={{fontFamily:'var(--font-mono)',fontSize:'var(--fs-mono)',color:'var(--text-body)',wordBreak:'break-word'}}>{c.value}</span>
-                <span style={{fontSize:'var(--fs-body-sm)',color:'var(--text-muted)'}}>{c.hint}</span>
+                <span className="contact-channel-value">{c.value}</span>
+                <span className="contact-channel-hint">{c.hint}</span>
               </Card>
             </a>
           ))}
         </div>
-        <div style={{display:'flex',justifyContent:'center'}}>
+        <div className="contact-motion-row">
           <Switch checked={motion} onChange={onMotion} label={t.motion}/>
         </div>
       </div>
@@ -44,9 +43,9 @@ export function Contact({data,motion,onMotion}){
 
 export function Footer({data}){
   return (
-    <footer style={{padding:'var(--s-8) var(--page-gutter)',borderTop:'1px solid var(--border-subtle)'}}>
-      <div style={{maxWidth:'var(--page-max)',margin:'0 auto',display:'flex',justifyContent:'space-between',gap:'var(--s-6)',flexWrap:'wrap',alignItems:'center'}}>
-        <span style={{fontFamily:'var(--font-display)',textTransform:'uppercase',fontSize:12,color:'var(--text-title)'}}>{data.player.name}</span>
+    <footer className="footer">
+      <div className="footer-inner">
+        <span className="footer-brand">{data.player.name}</span>
         <span className="ds-hud">{data.player.city} · {data.player.linkedin}</span>
       </div>
     </footer>

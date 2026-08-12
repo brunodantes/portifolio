@@ -1,12 +1,13 @@
-import React from 'react';
+import './StatReadout.css';
 
-export function StatReadout({value,label,unit,tone='accent',size='md',style,...rest}){
-  const c=tone==='signal'?'var(--signal)':tone==='plain'?'var(--text-title)':'var(--accent)';
-  const fs=size==='lg'?'var(--fs-display-lg)':size==='sm'?'var(--fs-h3)':'var(--fs-display-md)';
-  return React.createElement('div',{style:{display:'grid',gap:'6px',...style},...rest},
-    React.createElement('div',{style:{fontFamily:'var(--font-display)',fontSize:fs,lineHeight:1,color:c,
-      textShadow:tone==='plain'?'none':'var(--glow-text-accent)'}},
-      value,unit?React.createElement('span',{style:{fontSize:'0.45em',marginLeft:'0.25em',color:'var(--text-muted)'}},unit):null),
-    React.createElement('div',{style:{fontFamily:'var(--font-mono)',fontSize:'var(--fs-mono-sm)',
-      letterSpacing:'var(--ls-hud)',textTransform:'uppercase',color:'var(--text-muted)'}},label));
+export function StatReadout({value,label,unit,tone='accent',size='md',className,...rest}){
+  return (
+    <div className={['stat-readout',className].filter(Boolean).join(' ')} {...rest}>
+      <div className={`stat-readout-value stat-readout-value--${tone} stat-readout-value--${size}`}>
+        {value}
+        {unit?<span className="stat-readout-unit">{unit}</span>:null}
+      </div>
+      <div className="stat-readout-label">{label}</div>
+    </div>
+  );
 }

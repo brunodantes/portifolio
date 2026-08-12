@@ -6,6 +6,7 @@ import {HudPanel} from '../components/core/HudPanel.jsx';
 import {XpBar} from '../components/data/XpBar.jsx';
 import {SectionHeading} from '../components/navigation/SectionHeading.jsx';
 import {Marquee} from '../components/motion/Marquee.jsx';
+import './Stack.css';
 
 const S_ICONS='/assets/icons';
 
@@ -24,24 +25,25 @@ export function Stack({data}){
     return ()=>{window.removeEventListener('scroll',check);clearTimeout(t)};
   },[]);
   return (
-    <section style={{padding:'var(--section-y) var(--page-gutter)',background:'var(--bg-deep)',borderTop:'1px solid var(--border-subtle)',borderBottom:'1px solid var(--border-subtle)'}}>
-      <div style={{maxWidth:'var(--page-max)',margin:'0 auto',display:'grid',gap:'var(--s-12)'}} ref={ref}>
+    <section className="stack-section">
+      <div className="stack-inner" ref={ref}>
         <SectionHeading index="02" kicker={t.kicker} title={t.title} lead={t.lead}/>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'var(--s-16)',alignItems:'start'}}>
+        <div className="stack-grid">
           <HudPanel label="Character sheet" right={seen?'sync':'idle'}>
-            <div style={{display:'grid',gap:'var(--s-5)'}}>
+            <div className="stack-skills">
               {data.skills.map(s=><XpBar key={s.label} {...s} value={seen?s.value:0}/>)}
             </div>
           </HudPanel>
-          <div style={{display:'grid',gap:'var(--gap-grid)',gridTemplateColumns:'1fr 1fr',alignContent:'start'}}>
+          <div className="stack-groups">
             {data.stack.map(g=>(
-              <Card key={g.group} tone="raised" style={{display:'grid',gap:'var(--s-3)',alignContent:'start'}}>
-                <div style={{display:'flex',alignItems:'center',gap:9}}>
+              <Card key={g.group} tone="raised" className="stack-group-card">
+                <div className="stack-group-header">
                   <Icon name={g.icon} base={S_ICONS} size={16} color="var(--accent)"/>
-                  <span className="ds-hud" style={{color:'var(--text-title)'}}>{g.group}</span>
+                  <span className="ds-hud stack-group-title">{g.group}</span>
                 </div>
-                <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>{g.items.map(i=><Tag key={i}>{i}</Tag>)}</div>
-              </Card>))}
+                <div className="stack-group-items">{g.items.map(i=><Tag key={i}>{i}</Tag>)}</div>
+              </Card>
+            ))}
           </div>
         </div>
       </div>

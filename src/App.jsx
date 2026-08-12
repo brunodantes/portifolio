@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import {Button} from './components/core/Button.jsx';
 import {TopNav} from './components/navigation/TopNav.jsx';
 import {CursorHalo} from './components/motion/CursorHalo.jsx';
@@ -39,24 +40,20 @@ export default function App(){
       {motion?<CursorHalo strength={0.13}/>:null}
       <RadioPlayer tracks={RADIO_TRACKS}/>
       <TopNav brand={data.player.name} items={data.ui.nav} active={data.ui.nav[NAV_KEYS.indexOf(tab)]} onSelect={handleNavSelect}
-        right={<div style={{display:'flex',alignItems:'center',gap:'var(--s-4)'}}>
-          <div style={{display:'flex',alignItems:'center',gap:2}}>
+        right={<div className="app-lang-switch">
+          <div className="app-lang-options">
             {['pt','en'].map(l=>(
-              <button key={l} onClick={()=>setLang(l)}
-                style={{fontFamily:'var(--font-mono)',fontSize:'var(--fs-mono-sm)',letterSpacing:'var(--ls-hud)',
-                  textTransform:'uppercase',padding:'6px 10px',cursor:'pointer',background:'transparent',
-                  border:'var(--border-w) solid '+(lang===l?'var(--border-default)':'transparent'),
-                  borderRadius:'var(--r-xs)',color:lang===l?'var(--accent)':'var(--text-muted)'}}>{l}</button>
+              <button key={l} onClick={()=>setLang(l)} className={`app-lang-btn${lang===l?' app-lang-btn--active':''}`}>{l}</button>
             ))}
           </div>
           <Button size="sm" variant="secondary" onClick={()=>window.open(data.player.resumeUrl,'_blank','noopener,noreferrer')}>{data.ui.resumeBtn}</Button>
         </div>}/>
-      <div style={{position:'relative',zIndex:2}}>
-        <div ref={refs.inicio} style={{scrollMarginTop:72}}><Hero data={data} onNav={goTo}/></div>
-        <div ref={refs.trajetoria} style={{scrollMarginTop:72}}><About data={data}/></div>
+      <div className="app-content">
+        <div ref={refs.inicio} className="app-anchor"><Hero data={data} onNav={goTo}/></div>
+        <div ref={refs.trajetoria} className="app-anchor"><About data={data}/></div>
         <StackMarquee/>
-        <div ref={refs.equipamento} style={{scrollMarginTop:72}}><Stack data={data}/></div>
-        <div ref={refs.contato} style={{scrollMarginTop:72}}><Contact data={data} motion={motion} onMotion={setMotion}/></div>
+        <div ref={refs.equipamento} className="app-anchor"><Stack data={data}/></div>
+        <div ref={refs.contato} className="app-anchor"><Contact data={data} motion={motion} onMotion={setMotion}/></div>
         <Footer data={data}/>
       </div>
     </div>

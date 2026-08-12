@@ -1,6 +1,7 @@
 import React from 'react';
+import './TypedLines.css';
 
-export function TypedLines({lines=[],speed=58,hold=1900,loop=true,style,...rest}){
+export function TypedLines({lines=[],speed=58,hold=1900,loop=true,className,...rest}){
   const [i,setI]=React.useState(0);
   const [n,setN]=React.useState(0);
   const [del,setDel]=React.useState(false);
@@ -18,11 +19,13 @@ export function TypedLines({lines=[],speed=58,hold=1900,loop=true,style,...rest}
   const cut=shown.lastIndexOf(' ');
   const head=cut>-1?shown.slice(0,cut+1):'';
   const tail=cut>-1?shown.slice(cut+1):shown;
-  return React.createElement('span',{style:{...style},...rest},
-    head,
-    React.createElement('span',{style:{whiteSpace:'nowrap'}},tail,
-    React.createElement('span',{style:{display:'inline-block',width:'0.56em',height:'0.9em',
-      marginLeft:'0.12em',verticalAlign:'-0.06em',background:'var(--accent)',
-      boxShadow:'var(--glow-text-accent)',animation:'ds-caret 1s steps(1,end) infinite'}})),
-    React.createElement('style',null,'@keyframes ds-caret{0%,49%{opacity:1}50%,100%{opacity:0}}'));
+  return (
+    <span className={className} {...rest}>
+      {head}
+      <span className="typed-tail">
+        {tail}
+        <span className="typed-caret"/>
+      </span>
+    </span>
+  );
 }
