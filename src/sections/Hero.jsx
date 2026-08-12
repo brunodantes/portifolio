@@ -5,6 +5,7 @@ import {Tag} from '../components/core/Tag.jsx';
 import {HudPanel} from '../components/core/HudPanel.jsx';
 import {StatReadout} from '../components/data/StatReadout.jsx';
 import {TypedLines} from '../components/motion/TypedLines.jsx';
+import './Hero.css';
 
 const ICONS='/assets/icons';
 
@@ -13,7 +14,8 @@ const PLAYER_STACK=[
   ['typescript','TypeScript'],['angular','Angular'],['amazonaws','AWS'],
   ['docker','Docker'],['kubernetes','Kubernetes'],['postgresql','PostgreSQL'],
   ['microsoftsqlserver','SQL Server'],['oracle','Oracle'],['mongodb','MongoDB'],
-  ['rabbitmq','RabbitMQ'],['datadog','Datadog'],['opensearch','OpenSearch']
+  ['rabbitmq','RabbitMQ'],['datadog','Datadog'],['opensearch','OpenSearch'],
+  ['claude','Claude'],['devin','Devin']
 ];
 
 function useParallax(){
@@ -31,42 +33,37 @@ export function Hero({data,onNav}){
   const near=v=>`translate3d(${p.x*v}px,${p.y*v}px,0)`;
   const t=data.ui.hero;
   return (
-    <section style={{position:'relative',overflow:'hidden',padding:'92px var(--page-gutter) 72px',borderBottom:'1px solid var(--border-subtle)'}}>
-      <div aria-hidden style={{position:'absolute',inset:'-60px',backgroundImage:'var(--grid-line)',backgroundSize:'var(--grid-size) var(--grid-size)',transform:near(-8),maskImage:'radial-gradient(120% 80% at 50% 10%,#000,transparent 72%)',WebkitMaskImage:'radial-gradient(120% 80% at 50% 10%,#000,transparent 72%)'}}/>
-      <div aria-hidden style={{position:'absolute',inset:0,background:'var(--scanlines)',opacity:.5,pointerEvents:'none'}}/>
-      <div style={{position:'relative',zIndex:2,maxWidth:'var(--page-max)',margin:'0 auto',display:'grid',gridTemplateColumns:'1.15fr .85fr',gap:'var(--s-16)',alignItems:'center'}}>
-        <div style={{display:'grid',gap:'var(--s-6)',transform:near(10),padding:'var(--s-8)',
-          background:'linear-gradient(180deg,color-mix(in oklab,var(--carbon-800) 88%,transparent),color-mix(in oklab,var(--carbon-800) 74%,transparent))',
-          border:'1px solid var(--border-subtle)',borderRadius:'var(--r-md)',
-          backdropFilter:'blur(6px)',WebkitBackdropFilter:'blur(6px)'}}>
+    <section className="hero">
+      <div aria-hidden className="hero-grid-bg" style={{'--hero-parallax':near(-8)}}/>
+      <div aria-hidden className="hero-scanlines"/>
+      <div className="hero-inner">
+        <div className="hero-card" style={{'--hero-parallax':near(10)}}>
           <div className="ds-hud">{data.player.level}</div>
-          <div style={{display:'flex',alignItems:'baseline',gap:10,flexWrap:'wrap'}}>
-            <span style={{fontSize:'var(--fs-body-lg)',color:'var(--text-title)',fontWeight:'var(--fw-semibold)'}}>{data.player.fullName}</span>
-            <span className="ds-hud" style={{color:'var(--text-muted)'}}>{data.player.role}</span>
+          <div className="hero-name-row">
+            <span className="hero-fullname">{data.player.fullName}</span>
+            <span className="ds-hud hero-role">{data.player.role}</span>
           </div>
-          <h1 style={{fontFamily:'var(--font-display)',textTransform:'uppercase',fontSize:'var(--fs-display-md)',lineHeight:'var(--lh-display-md)',letterSpacing:'var(--ls-display-md)',color:'var(--accent)',textShadow:'var(--glow-text-accent)',margin:0}}>
-            {t.headline}
-          </h1>
-          <div className="ds-hud" style={{display:'flex',alignItems:'center',gap:8}}>
-            <span style={{color:'var(--text-faint)'}}>{t.focusKicker}</span>
-            <span style={{color:'var(--accent)'}}><TypedLines lines={data.builds}/></span>
+          <h1 className="hero-headline">{t.headline}</h1>
+          <div className="ds-hud hero-focus">
+            <span className="hero-focus-kicker">{t.focusKicker}</span>
+            <span className="hero-focus-value"><TypedLines lines={data.builds}/></span>
           </div>
-          <p style={{fontSize:'var(--fs-body-lg)',color:'var(--text-muted)',maxWidth:'52ch'}}>{data.player.resumo}</p>
-          <div style={{display:'flex',gap:'var(--s-3)',flexWrap:'wrap',alignItems:'center'}}>
+          <p className="hero-resumo">{data.player.resumo}</p>
+          <div className="hero-ctas">
             <Button variant="primary" size="lg" onClick={()=>onNav('trajetoria')}>{t.ctaPrimary}<Icon name="chevron-right" base={ICONS} size={16}/></Button>
             <Button variant="ghost" size="lg" onClick={()=>onNav('contato')}><Icon name="mail" base={ICONS} size={16}/>{t.ctaSecondary}</Button>
           </div>
-          <div style={{display:'flex',gap:'var(--s-4)',flexWrap:'wrap',paddingTop:'var(--s-2)'}}>
-            <span className="ds-hud" style={{display:'inline-flex',gap:8,alignItems:'center'}}><Icon name="map-pin" base={ICONS} size={14}/>{data.player.city}</span>
-            <span className="ds-hud" style={{display:'inline-flex',gap:8,alignItems:'center'}}><Icon name="git-branch" base={ICONS} size={14}/>{data.player.github}</span>
+          <div className="hero-meta">
+            <span className="ds-hud hero-meta-item"><Icon name="map-pin" base={ICONS} size={14}/>{data.player.city}</span>
+            <span className="ds-hud hero-meta-item"><Icon name="git-branch" base={ICONS} size={14}/>{data.player.github}</span>
           </div>
         </div>
-        <div style={{transform:near(-16)}}>
+        <div className="hero-panel-wrap" style={{'--hero-parallax':near(-16)}}>
           <HudPanel label="Player / Stats" right={data.player.level} glow>
-            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'var(--s-6)'}}>
+            <div className="hero-stats-grid">
               {data.stats.map(s=><StatReadout key={s.label} {...s}/>)}
             </div>
-            <div style={{marginTop:'var(--s-6)',paddingTop:'var(--s-5)',borderTop:'1px solid var(--border-subtle)',display:'flex',gap:'var(--s-2)',flexWrap:'wrap'}}>
+            <div className="hero-stack-row">
               {PLAYER_STACK.map(([ic,label])=><Tag key={label} icon={ic} base={ICONS}>{label}</Tag>)}
             </div>
           </HudPanel>

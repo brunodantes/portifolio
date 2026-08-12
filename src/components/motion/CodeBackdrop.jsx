@@ -1,4 +1,5 @@
 import React from 'react';
+import './CodeBackdrop.css';
 
 const DOTNET_LINES=[
 'using Microsoft.AspNetCore.Builder;',
@@ -87,6 +88,28 @@ function column(seed,rows){
   return out.join('\n');
 }
 
+function CodeSheet({bright,columns,rows,speed,opacity,color,x,y}){
+  const cols=Array.from({length:columns},(_,i)=>i);
+  const vars=bright?{'--cb-columns':columns,'--cb-x':`${x}px`,'--cb-y':`${y}px`}:{'--cb-columns':columns};
+  return (
+    <div className={`code-backdrop-sheet code-backdrop-sheet--${bright?'bright':'dim'}`} style={vars}>
+      {cols.map(i=>(
+        <pre
+          key={i}
+          className={`code-backdrop-col code-backdrop-col--${bright?'bright':'dim'}`}
+          style={{
+            '--cb-speed':`${speed+i*11}s`,
+            '--cb-delay':`${-i*9}s`,
+            ...(bright?{'--cb-color':color}:{'--cb-opacity':opacity})
+          }}
+        >
+          {column(i+1,rows)}
+        </pre>
+      ))}
+    </div>
+  );
+}
+
 export function CodeBackdrop({columns=3,rows=46,opacity=0.10,reveal=true,color='var(--green-500)',speed=64,fixed:isFixed=true}){
   const [p,setP]=React.useState({x:-9999,y:-9999});
   React.useEffect(()=>{
@@ -95,24 +118,10 @@ export function CodeBackdrop({columns=3,rows=46,opacity=0.10,reveal=true,color='
     window.addEventListener('pointermove',m,{passive:true});
     return ()=>window.removeEventListener('pointermove',m);
   },[reveal]);
-  const cols=Array.from({length:columns},(_,i)=>i);
-  const sheet=(bright)=>React.createElement('div',{
-    style:{position:'absolute',inset:0,display:'grid',
-      gridTemplateColumns:'repeat('+columns+',1fr)',gap:'var(--s-8)',padding:'0 var(--s-6)',
-      WebkitMaskImage:bright
-        ?'radial-gradient(240px circle at '+p.x+'px '+p.y+'px,#000 0%,transparent 70%)'
-        :'linear-gradient(180deg,transparent 0%,#000 18%,#000 72%,transparent 100%)',
-      maskImage:bright
-        ?'radial-gradient(240px circle at '+p.x+'px '+p.y+'px,#000 0%,transparent 70%)'
-        :'linear-gradient(180deg,transparent 0%,#000 18%,#000 72%,transparent 100%)'}},
-    cols.map(i=>React.createElement('pre',{key:i,
-      style:{margin:0,fontFamily:'var(--font-mono)',fontSize:11,lineHeight:1.7,whiteSpace:'pre',
-        color:bright?color:'var(--ink-300)',opacity:bright?0.85:opacity,
-        animation:'ds-code-drift '+(speed+i*11)+'s linear infinite',
-        animationDelay:(-i*9)+'s'}},column(i+1,rows))));
-  return React.createElement('div',{'aria-hidden':true,
-    style:{position:isFixed?'fixed':'absolute',inset:0,zIndex:0,overflow:'hidden',pointerEvents:'none'}},
-    sheet(false),reveal?sheet(true):null,
-    React.createElement('style',null,
-      '@keyframes ds-code-drift{from{transform:translateY(0)}to{transform:translateY(-50%)}}'));
+  return (
+    <div aria-hidden="true" className={`code-backdrop${isFixed?' code-backdrop--fixed':''}`}>
+      <CodeSheet bright={false} columns={columns} rows={rows} speed={speed} opacity={opacity}/>
+      {reveal?<CodeSheet bright columns={columns} rows={rows} speed={speed} color={color} x={p.x} y={p.y}/>:null}
+    </div>
+  );
 }

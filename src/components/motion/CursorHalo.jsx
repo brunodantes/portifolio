@@ -1,4 +1,5 @@
 import React from 'react';
+import './CursorHalo.css';
 
 export function CursorHalo({size,color='var(--green-500)',strength=0.16,ring=true}){
   const [p,setP]=React.useState({x:-9999,y:-9999});
@@ -8,12 +9,15 @@ export function CursorHalo({size,color='var(--green-500)',strength=0.16,ring=tru
     return ()=>window.removeEventListener('pointermove',m);
   },[]);
   const r=size||'var(--cursor-halo)';
-  return React.createElement(React.Fragment,null,
-    React.createElement('div',{'aria-hidden':true,style:{position:'fixed',inset:0,zIndex:1,
-      pointerEvents:'none',background:'radial-gradient(circle '+(typeof r==='number'?r+'px':r)+
-        ' at '+p.x+'px '+p.y+'px, color-mix(in oklab,'+color+' '+Math.round(strength*100)+'%,transparent), transparent 70%)'}}),
-    ring?React.createElement('div',{'aria-hidden':true,style:{position:'fixed',left:p.x,top:p.y,zIndex:60,
-      width:26,height:26,marginLeft:-13,marginTop:-13,borderRadius:'50%',pointerEvents:'none',
-      border:'1px solid color-mix(in oklab,'+color+' 55%,transparent)',
-      transition:'transform var(--dur-fast) var(--ease-out)'}}):null);
+  const vars={
+    '--halo-x':`${p.x}px`,'--halo-y':`${p.y}px`,
+    '--halo-radius':typeof r==='number'?`${r}px`:r,
+    '--halo-color':color,'--halo-strength':`${Math.round(strength*100)}%`
+  };
+  return (
+    <>
+      <div aria-hidden="true" className="cursor-halo" style={vars}/>
+      {ring?<div aria-hidden="true" className="cursor-halo-ring" style={vars}/>:null}
+    </>
+  );
 }
