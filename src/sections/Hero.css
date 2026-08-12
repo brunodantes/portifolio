@@ -54,3 +54,8 @@
   margin-top:var(--s-6);padding-top:var(--s-5);border-top:1px solid var(--border-subtle);
   display:flex;gap:var(--s-2);flex-wrap:wrap;
 }
+
+@media (max-width:900px){
+  .hero{padding:64px var(--page-gutter) 48px}
+  .hero-inner{grid-template-columns:1fr;gap:var(--s-10)}
+}

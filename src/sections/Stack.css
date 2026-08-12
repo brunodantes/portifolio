@@ -12,3 +12,11 @@
 .stack-group-header{display:flex;align-items:center;gap:9px}
 .stack-group-title{color:var(--text-title)}
 .stack-group-items{display:flex;gap:6px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .stack-grid{grid-template-columns:1fr;gap:var(--s-10)}
+}
+
+@media (max-width:560px){
+  .stack-groups{grid-template-columns:1fr}
+}
