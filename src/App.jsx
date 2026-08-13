@@ -4,6 +4,7 @@ import {Button} from './components/core/Button.jsx';
 import {TopNav} from './components/navigation/TopNav.jsx';
 import {CursorHalo} from './components/motion/CursorHalo.jsx';
 import {CodeBackdrop} from './components/motion/CodeBackdrop.jsx';
+import {Reveal} from './components/motion/Reveal.jsx';
 import {Hero} from './sections/Hero.jsx';
 import {Stack, StackMarquee} from './sections/Stack.jsx';
 import {About} from './sections/About.jsx';
@@ -50,11 +51,11 @@ export default function App(){
         </div>}/>
       <div className="app-content">
         <div ref={refs.inicio} className="app-anchor"><Hero data={data} onNav={goTo}/></div>
-        <div ref={refs.trajetoria} className="app-anchor"><About data={data}/></div>
+        <div ref={refs.trajetoria} className="app-anchor"><Reveal disabled={!motion}><About data={data}/></Reveal></div>
         <StackMarquee/>
-        <div ref={refs.equipamento} className="app-anchor"><Stack data={data}/></div>
-        <div ref={refs.contato} className="app-anchor"><Contact data={data} motion={motion} onMotion={setMotion}/></div>
-        <Footer data={data}/>
+        <div ref={refs.equipamento} className="app-anchor"><Reveal disabled={!motion}><Stack data={data}/></Reveal></div>
+        <div ref={refs.contato} className="app-anchor"><Reveal disabled={!motion}><Contact data={data} motion={motion} onMotion={setMotion}/></Reveal></div>
+        <Reveal disabled={!motion}><Footer data={data}/></Reveal>
       </div>
     </div>
   );

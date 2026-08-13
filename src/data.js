@@ -123,11 +123,10 @@ const EXPERIENCE={
       bullets:[
         'Liderança técnica no desenvolvimento e evolução do Necton Portal e de sistemas de risco integrados à LiNe da B3, definindo padrões arquiteturais, promovendo qualidade de código e apoiando tecnicamente a squad. O LiNe é a plataforma de gestão de risco pré-negociação da B3, integrada ao ambiente de negociação e utilizada para definição e validação de limites de negociação.',
         'Arquitetura e evolução de microsserviços distribuídos utilizando .NET, AWS e Kubernetes, priorizando alta disponibilidade, resiliência, escalabilidade e observabilidade.',
-        'Desenvolvimento do Necton Portal, plataforma responsável por automatizar processos de Middle Office, distribuição de documentos financeiros, gestão operacional e integrações entre serviços críticos do ambiente financeiro, com frontend em React e Next.js.',
-        'Modernização da plataforma de geração e distribuição de documentos financeiros, substituindo um fluxo baseado em Quartz e polling por uma arquitetura orientada a eventos utilizando RabbitMQ, reduzindo a latência entre geração e entrega dos documentos.',
+        'Desenvolvimento do Necton Portal, plataforma responsável por automatizar processos de Middle Office, geração e distribuição de documentos financeiros, gestão operacional e integrações entre serviços críticos do ambiente financeiro, com frontend em React e Next.js.',
+        'Modernização da plataforma de geração e distribuição de documentos financeiros, substituindo um fluxo legado por uma arquitetura orientada a eventos utilizando RabbitMQ, reduzindo a latência entre geração e entrega dos documentos.',
         'Projeto da estratégia de processamento concorrente para consumidores distribuídos executando em múltiplos pods Kubernetes, implementando controle de concorrência com PostgreSQL Advisory Transaction Locks para garantir o processamento único de cada execução lógica e eliminar condições de corrida.',
-        'Modelagem da orquestração de execuções compostas por múltiplos documentos, estabelecendo regras de conclusão, tratamento de estados de processamento e fluxo automatizado para distribuição dos arquivos.',
-        'Integração com AWS S3 e Amazon SES para armazenamento, gerenciamento e distribuição automatizada de documentos financeiros.',
+        'Integração com AWS S3 e Amazon RDS para armazenamento, gerenciamento e distribuição automatizada de documentos financeiros.',
         'Desenvolvimento de soluções para plataformas de risco, integrando serviços internos ao LiNe da B3 para apoiar processos de validação de limites, monitoramento de risco e fluxos operacionais do mercado financeiro.',
         'Otimização de desempenho através da evolução de consultas e índices PostgreSQL, além da implementação de observabilidade utilizando Datadog e OpenSearch para monitoramento e diagnóstico em produção.'
       ],
