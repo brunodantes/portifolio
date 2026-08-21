@@ -6,13 +6,13 @@ const RESUME_URLS={
 const CORE_STATS={
   pt:[
     {value:'9',unit:'anos',label:'Engenharia',tone:'accent'},
-    {value:'3',label:'Squads lideradas',tone:'signal'},
+    {value:'2',label:'Squads lideradas',tone:'signal'},
     {value:'4',label:'Fintechs / bancos',tone:'accent'},
     {value:'2',label:'Idiomas',tone:'plain'}
   ],
   en:[
     {value:'9',unit:'years',label:'Engineering',tone:'accent'},
-    {value:'3',label:'Squads led',tone:'signal'},
+    {value:'2',label:'Squads led',tone:'signal'},
     {value:'4',label:'Fintechs / banks',tone:'accent'},
     {value:'2',label:'Languages',tone:'plain'}
   ]
@@ -61,14 +61,15 @@ const STACK={
 };
 
 const ITAU_STACK=[
-  ['dotnet','.NET'],
-  ['react','React'],
-  ['nextdotjs','Next.js'],
+  ['dotnet','.NET 10'],
+  ['react','React 19'],
+  [null,'Vite'],
   ['docker','Docker'],
-  ['kubernetes','Kubernetes'],
   ['amazonaws','AWS'],
+  [null,'ECS'],
+  [null,'API Gateway'],
   [null,'DynamoDB'],
-  ['claude','Claude'],
+  ['datadog','Datadog'],
   ['devin','Devin']
 ];
 
@@ -108,11 +109,13 @@ const EXPERIENCE={
       period:'Mar 2026 — Atual',
       current:true,
       bullets:[
-        'Atuação no desenvolvimento da calculadora de sucessão do Private Bank, plataforma de alta disponibilidade voltada a planejamento sucessório e gestão patrimonial.',
-        'Em parceria com o tech lead da squad, construção do zero de um fluxo de desenvolvimento orientado a agentes de IA (squad híbrida humano-IA) com o AI-DLC da AWS.',
-        'Cobertura de código apoiada por Claude e Devin, com criação de skills reutilizáveis para acelerar e padronizar o desenvolvimento front-end e back-end.',
-        'Microsserviços distribuídos com .NET, React, Next.js, Docker, Kubernetes, AWS e DynamoDB como banco NoSQL.',
-        'Contribuição para padrões arquiteturais e direcionamento técnico de iniciativas backend e frontend.'
+        'Desenvolvimento full-stack, desde o início do projeto, de uma calculadora de sucessão para apoiar o planejamento sucessório e patrimonial de clientes do Private Bank.',
+        'Implementação de backend, frontend e integrações em uma arquitetura AWS com .NET 10, React 19 e Vite, BFF, API Gateway, containers Docker no ECS, Elastic Load Balancing e DynamoDB.',
+        'Construção de integrações entre APIs com Refit e Polly, aplicando políticas de retry, timeout e circuit breaker para ampliar a resiliência da solução.',
+        'Estruturação de um fluxo de desenvolvimento orientado por IA com o AI-DLC da AWS, cobrindo preparação e refinamento de histórias, planejamento técnico, implementação, testes, revisão e documentação com apoio de Devin e Claude.',
+        'Criação e compartilhamento de skills reutilizáveis para gerar interfaces a partir de componentes do Figma, construir contratos do API Gateway e disseminar padrões e boas práticas de React e .NET para a comunidade de engenharia.',
+        'Aplicação do fluxo com IA contribuindo para uma redução próxima de 80% no tempo de conclusão das histórias, com maior padronização e agilidade na entrega.',
+        'Participação ativa no refinamento do backlog e nas decisões técnicas, propondo melhorias no design da ferramenta e promovendo qualidade com testes unitários e de integração usando xUnit, mocks, AutoBogus, Jest e Cypress, além de observabilidade com logs, métricas, tracing e dashboards no Datadog e CloudWatch.'
       ],
       stack:ITAU_STACK
     },
@@ -161,11 +164,13 @@ const EXPERIENCE={
       period:'Mar 2026 — Present',
       current:true,
       bullets:[
-        'Working on the Private Bank succession planning calculator, a high-availability platform supporting estate succession planning and wealth management.',
-        'Partnering with the squad tech lead to build an AI-agent-driven development workflow from the ground up (hybrid human-AI squad) using AWS AI-DLC.',
-        'Code coverage supported by Claude and Devin, building reusable skills to accelerate and standardize front-end and back-end development.',
-        'Distributed microservices using .NET, React, Next.js, Docker, Kubernetes, AWS, and DynamoDB as a NoSQL store.',
-        'Contributing to architectural standards and technical direction across backend and frontend initiatives.'
+        'Full-stack development, from the project’s inception, of a succession planning calculator supporting estate and wealth planning for Private Bank clients.',
+        'Backend, frontend, and integration implementation on an AWS architecture using .NET 10, React 19 and Vite, a BFF, API Gateway, Docker containers on ECS, Elastic Load Balancing, and DynamoDB.',
+        'Built API integrations with Refit and Polly, applying retry, timeout, and circuit breaker policies to improve solution resilience.',
+        'Established an AI-driven development workflow with AWS AI-DLC, covering story preparation and refinement, technical planning, implementation, testing, review, and documentation with support from Devin and Claude.',
+        'Created and shared reusable skills for generating interfaces from Figma components, building API Gateway contracts, and disseminating React and .NET standards and best practices across the engineering community.',
+        'Applied the AI-driven workflow to help reduce story completion time by nearly 80%, while increasing standardization and delivery speed.',
+        'Actively contributed to backlog refinement and technical decisions, proposed improvements to the tool’s design, and promoted quality through unit and integration testing with xUnit, mocks, AutoBogus, Jest, and Cypress, supported by logs, metrics, tracing, and dashboards in Datadog and CloudWatch.'
       ],
       stack:ITAU_STACK
     },
